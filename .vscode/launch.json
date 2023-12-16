@@ -7,7 +7,7 @@
 			"program": "${workspaceFolder}/src/index.ts",
 			"request": "launch",
 			"type": "bun",
-			"watchMode": "hot"
+			"watchMode": true
 		}
 	]
 }
