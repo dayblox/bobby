@@ -69,8 +69,8 @@ export default {
 					`${users[Math.floor(Math.random() * users.length)]}`,
 				)
 			case "users": {
-				const quantity = interaction.options.getInteger("quantity")
-				if (!quantity || quantity > users.length)
+				const quantity = interaction.options.getInteger("quantity")!
+				if (quantity > users.length)
 					return await interaction.reply(
 						`Cannot select ${quantity} users from only ${users.length} users.`,
 					)
@@ -82,15 +82,15 @@ export default {
 				return await interaction.reply(selected.join(" "))
 			}
 			case "groups": {
-				const groupSize = interaction.options.getInteger("group_size")
-				if (!groupSize) return
-
-				const groups: string[][] = Array.from(Array(groupSize), () => [])
+				const groupSize = interaction.options.getInteger("group_size")!
+				const groups = Array.from(Array(groupSize), () =>
+					Array(Math.ceil(users.length / groupSize)).fill(""),
+				)
 				for (let i = 0; users.length; i++)
-					groups[i % groupSize].push(
-						users.splice(Math.floor(Math.random() * users.length), 1)[0]
-							.displayName,
-					)
+					groups[i % groupSize][Math.floor(i / groupSize)] = users.splice(
+						Math.floor(Math.random() * users.length),
+						1,
+					)[0].displayName
 
 				return await interaction.reply(
 					`\`\`\`${new AsciiTable3("Random groups")

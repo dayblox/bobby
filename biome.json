@@ -5,5 +5,12 @@
 		"formatter": {
 			"semicolons": "asNeeded"
 		}
-	}
+	},
+	"linter": {
+		"rules": {
+			"style": {
+				"noNonNullAssertion": "off"
+			}
+		}
+	},
 }
