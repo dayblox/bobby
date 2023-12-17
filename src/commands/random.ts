@@ -25,14 +25,14 @@ export default {
 		.setDescription("random")
 		.addSubcommand((sub) =>
 			withUserOptions(
-				sub.setName("user").setDescription("Randomly select one user"),
+				sub.setName("user").setDescription("Select one user randomly"),
 			),
 		)
 		.addSubcommand((sub) =>
 			withUserOptions(
 				sub
 					.setName("users")
-					.setDescription("Randomly select multiple users")
+					.setDescription("Select multiple users randomly")
 					.addIntegerOption((option) =>
 						option
 							.setName("quantity")
@@ -47,7 +47,7 @@ export default {
 			withUserOptions(
 				sub
 					.setName("groups")
-					.setDescription("Randomly form groups")
+					.setDescription("Form groups randomly")
 					.addIntegerOption((option) =>
 						option
 							.setName("group_size")
@@ -55,23 +55,40 @@ export default {
 							.setRequired(true),
 					),
 			),
+		)
+		.addSubcommand((sub) =>
+			sub
+				.setName("number")
+				.setDescription("Pick a random number")
+				.addIntegerOption((option) =>
+					option
+						.setName("min")
+						.setDescription("Minimum value (included)")
+						.setRequired(true),
+				)
+				.addIntegerOption((option) =>
+					option
+						.setName("max")
+						.setDescription("Maximum value (included)")
+						.setRequired(true),
+				),
 		),
-	async execute(interaction: ChatInputCommandInteraction) {
+	async execute(int: ChatInputCommandInteraction) {
 		const users = []
 		for (let i = 1; i <= maxUsers; i++) {
-			const user = interaction.options.getUser(`user_${i}`)
+			const user = int.options.getUser(`user_${i}`)
 			if (user) users.push(user)
 		}
 
-		switch (interaction.options.getSubcommand()) {
+		switch (int.options.getSubcommand()) {
 			case "user":
-				return await interaction.reply(
+				return await int.reply(
 					`${users[Math.floor(Math.random() * users.length)]}`,
 				)
 			case "users": {
-				const quantity = interaction.options.getInteger("quantity")!
+				const quantity = int.options.getInteger("quantity")!
 				if (quantity > users.length)
-					return await interaction.reply(
+					return await int.reply(
 						`Cannot select ${quantity} users from only ${users.length} users.`,
 					)
 				const selected = []
@@ -79,10 +96,10 @@ export default {
 					selected.push(
 						users.splice(Math.floor(Math.random() * users.length), 1)[0],
 					)
-				return await interaction.reply(selected.join(" "))
+				return await int.reply(selected.join(" "))
 			}
 			case "groups": {
-				const groupSize = interaction.options.getInteger("group_size")!
+				const groupSize = int.options.getInteger("group_size")!
 				const groups = Array.from(Array(groupSize), () =>
 					Array(Math.ceil(users.length / groupSize)).fill(""),
 				)
@@ -92,12 +109,22 @@ export default {
 						1,
 					)[0].displayName
 
-				return await interaction.reply(
+				return await int.reply(
 					`\`\`\`${new AsciiTable3("Random groups")
 						.addRowMatrix(groups)
 						.setStyle("unicode-single")}\`\`\``,
 				)
 			}
+			case "number":
+				return await int.reply(
+					Math.floor(
+						Math.random() *
+							(int.options.getInteger("max")! -
+								int.options.getInteger("min")! +
+								1) +
+							int.options.getInteger("min")!,
+					).toString(),
+				)
 		}
 	},
 }
