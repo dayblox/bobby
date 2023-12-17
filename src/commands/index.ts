@@ -2,4 +2,7 @@ import coinflip from "./coinflip"
 import random from "./random"
 import shuffle from "./shuffle"
 
-export default [random, coinflip, shuffle]
+const commands = [random, coinflip, shuffle]
+
+export default commands
+export type Commands = (typeof commands)[number]["data"][]
