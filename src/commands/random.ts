@@ -5,7 +5,7 @@ import {
 	SlashCommandSubcommandBuilder,
 } from "discord.js"
 
-const maxUsers = 10
+const maxUsers = Number(Bun.env.MAX_USERS)
 
 const withUserOptions = (builder: SlashCommandSubcommandBuilder) => {
 	for (let i = 1; i <= maxUsers; i++) {

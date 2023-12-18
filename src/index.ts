@@ -5,7 +5,7 @@ import register from "./register"
 register(commands.map(({ data }) => data))
 
 new Client({ intents: [GatewayIntentBits.Guilds] })
-	.on("interactionCreate", async (interaction) => {
+	.on("interactionCreate", (interaction) => {
 		if (!interaction.isChatInputCommand()) return
 		commands
 			.find(({ data: { name } }) => name === interaction.commandName)
