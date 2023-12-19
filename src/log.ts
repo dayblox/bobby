@@ -1,6 +1,6 @@
 import { ChatInputCommandInteraction } from "discord.js"
 
-export default (interaction: ChatInputCommandInteraction) => {
+export default async (interaction: ChatInputCommandInteraction) => {
 	let msg = interaction.commandName
 	try {
 		msg += ` ${interaction.options.getSubcommand()}`
@@ -16,6 +16,7 @@ export default (interaction: ChatInputCommandInteraction) => {
 				{} as Record<string, string | number | boolean | undefined>,
 			),
 			author: interaction.user.displayName,
+			result: (await interaction.fetchReply()).content,
 		}),
 	)
 }

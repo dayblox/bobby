@@ -1,15 +1,15 @@
 {
-	"name": "bun-ts",
-	"author": "dayblox",
-	"description": "Bun + TypeScript starter",
-	"scripts": {
-		"start": "bun src/index.ts"
-	},
-	"devDependencies": {
-		"bun-types": "latest"
-	},
-	"dependencies": {
-		"ascii-table3": "^0.9.0",
-		"discord.js": "^14.14.1"
-	}
+  "name": "bun-ts",
+  "author": "dayblox",
+  "description": "Bun + TypeScript starter",
+  "scripts": {
+    "start": "bun src/index.ts"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "dependencies": {
+    "ascii-table3": "^0.9.0",
+    "discord.js": "^14.14.1"
+  }
 }
