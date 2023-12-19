@@ -5,6 +5,6 @@ export default {
 		.setName("coinflip")
 		.setDescription("Flip a coin"),
 	async execute(int: ChatInputCommandInteraction) {
-		int.reply(Math.random() < 0.5 ? "Heads" : "Tails")
+		int.reply(Math.random() < 0.5 ? "🪙 Heads" : "🪙 Tails")
 	},
 }
