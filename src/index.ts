@@ -10,7 +10,6 @@ new Client({ intents: [GatewayIntentBits.Guilds] })
 		if (!interaction.isChatInputCommand()) return
 		commands
 			.find(({ data: { name } }) => name === interaction.commandName)
-			?.execute(interaction)
-		log(interaction)
+			?.execute(interaction) && log(interaction)
 	})
 	.login(Bun.env.TOKEN)
