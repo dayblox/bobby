@@ -13,7 +13,16 @@ const withUserOptions = (builder: SlashCommandSubcommandBuilder) => {
 			option
 				.setName(`user_${i}`)
 				.setDescription("User")
-				.setRequired(i <= 2),
+				.setRequired(i === 1),
+		)
+	}
+	return builder
+}
+
+const withNameOptions = (builder: SlashCommandSubcommandBuilder) => {
+	for (let i = 1; i <= maxUsers; i++) {
+		builder.addStringOption((option) =>
+			option.setName(`name_${i}`).setDescription("Name"),
 		)
 	}
 	return builder
@@ -24,36 +33,42 @@ export default {
 		.setName("random")
 		.setDescription("random")
 		.addSubcommand((sub) =>
-			withUserOptions(
-				sub.setName("user").setDescription("Select one user randomly"),
+			withNameOptions(
+				withUserOptions(
+					sub.setName("user").setDescription("Select one user randomly"),
+				),
 			),
 		)
 		.addSubcommand((sub) =>
-			withUserOptions(
-				sub
-					.setName("users")
-					.setDescription("Select multiple users randomly")
-					.addIntegerOption((option) =>
-						option
-							.setName("quantity")
-							.setDescription("How many users to select")
-							.setRequired(true)
-							.setMinValue(1)
-							.setMaxValue(maxUsers - 1),
-					),
+			withNameOptions(
+				withUserOptions(
+					sub
+						.setName("users")
+						.setDescription("Select multiple users randomly")
+						.addIntegerOption((option) =>
+							option
+								.setName("quantity")
+								.setDescription("How many users to select")
+								.setRequired(true)
+								.setMinValue(1)
+								.setMaxValue(2 * maxUsers - 1),
+						),
+				),
 			),
 		)
 		.addSubcommand((sub) =>
-			withUserOptions(
-				sub
-					.setName("groups")
-					.setDescription("Form groups randomly")
-					.addIntegerOption((option) =>
-						option
-							.setName("group_size")
-							.setDescription("How many users per group")
-							.setRequired(true),
-					),
+			withNameOptions(
+				withUserOptions(
+					sub
+						.setName("groups")
+						.setDescription("Form groups randomly")
+						.addIntegerOption((option) =>
+							option
+								.setName("group_size")
+								.setDescription("How many users per group")
+								.setRequired(true),
+						),
+				),
 			),
 		)
 		.addSubcommand((sub) =>
@@ -77,7 +92,9 @@ export default {
 		const users = []
 		for (let i = 1; i <= maxUsers; i++) {
 			const user = int.options.getUser(`user_${i}`)
+			const name = int.options.getString(`name_${i}`)
 			if (user) users.push(user)
+			if (name) users.push(name)
 		}
 
 		switch (int.options.getSubcommand()) {
@@ -89,7 +106,7 @@ export default {
 				const quantity = int.options.getInteger("quantity")!
 				if (quantity > users.length)
 					return await int.reply(
-						`Cannot select ${quantity} users from only ${users.length} users.`,
+						`Cannot select ${quantity} users from a list of only ${users.length}.`,
 					)
 				const selected = []
 				for (let i = 0; i < quantity; i++)
@@ -103,11 +120,14 @@ export default {
 				const groups = Array.from(Array(groupSize), () =>
 					Array(Math.ceil(users.length / groupSize)).fill(""),
 				)
-				for (let i = 0; users.length; i++)
-					groups[i % groupSize][Math.floor(i / groupSize)] = users.splice(
+				for (let i = 0; users.length; i++) {
+					const user = users.splice(
 						Math.floor(Math.random() * users.length),
 						1,
-					)[0].displayName
+					)[0]
+					groups[i % groupSize][Math.floor(i / groupSize)] =
+						typeof user === "string" ? user : user.displayName
+				}
 
 				return await int.reply(
 					`\`\`\`${new AsciiTable3("Random groups")
