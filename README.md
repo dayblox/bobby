@@ -1,8 +1,4 @@
-# Bun + TypeScript starter
-
-![](../../actions/workflows/ci.yml/badge.svg)
-
-[![](https://railway.app/button.svg)](https://railway.app/template/G3k1Tv?referralCode=bonus)
+# Bobby the Discord bot
 
 ## Key Features
 
@@ -34,11 +30,9 @@
 
 ## Getting Started
 
-1.  **[Deploy on Railway](https://railway.app/template/G3k1Tv?referralCode=bonus)** or **[use this template](https://github.com/dayblox/bun-ts/generate)**
+1.  **Clone** the repository
 
-2.  **Clone** the repository
-
-3.  **Install** dependencies
+2.  **Install** dependencies
 
     ```sh
     bun i
