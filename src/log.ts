@@ -8,7 +8,10 @@ export default async (interaction: ChatInputCommandInteraction) => {
 	console.log(
 		JSON.stringify({
 			msg,
-			options: interaction.options.data[0]?.options?.reduce(
+			options: (
+				interaction.options.data[0]?.options ??
+				(interaction.options.data[0] && [interaction.options.data[0]])
+			)?.reduce(
 				(acc, { name, value, user }) => {
 					acc[name] = user?.displayName ?? value
 					return acc
