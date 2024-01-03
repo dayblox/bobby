@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
 
 export default {
-	data: new SlashCommandBuilder()
+	config: new SlashCommandBuilder()
 		.setName("shuffle")
 		.setDescription("Shuffle words randomly")
 		.addStringOption((option) =>
@@ -10,7 +10,7 @@ export default {
 				.setDescription("Words to shuffle")
 				.setRequired(true),
 		),
-	async execute(int: ChatInputCommandInteraction) {
+	execute(int: ChatInputCommandInteraction) {
 		const words = int.options.getString("words")!.split(/[ ,;_/-]+/)
 		for (let i = words.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1))

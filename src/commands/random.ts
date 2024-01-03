@@ -29,7 +29,7 @@ const withNameOptions = (builder: SlashCommandSubcommandBuilder) => {
 }
 
 export default {
-	data: new SlashCommandBuilder()
+	config: new SlashCommandBuilder()
 		.setName("random")
 		.setDescription("random")
 		.addSubcommand((sub) =>
@@ -99,13 +99,11 @@ export default {
 
 		switch (int.options.getSubcommand()) {
 			case "user":
-				return await int.reply(
-					`${users[Math.floor(Math.random() * users.length)]}`,
-				)
+				return int.reply(`${users[Math.floor(Math.random() * users.length)]}`)
 			case "users": {
 				const quantity = int.options.getInteger("quantity")!
 				if (quantity > users.length)
-					return await int.reply(
+					return int.reply(
 						`Cannot select ${quantity} users from a list of only ${users.length}.`,
 					)
 				const selected = []
@@ -113,7 +111,7 @@ export default {
 					selected.push(
 						users.splice(Math.floor(Math.random() * users.length), 1)[0],
 					)
-				return await int.reply(selected.join(" "))
+				return int.reply(selected.join(" "))
 			}
 			case "groups": {
 				const groupSize = int.options.getInteger("group_size")!
@@ -129,14 +127,14 @@ export default {
 						typeof user === "string" ? user : user.displayName
 				}
 
-				return await int.reply(
+				return int.reply(
 					`\`\`\`${new AsciiTable3("Random groups")
 						.addRowMatrix(groups)
 						.setStyle("unicode-single")}\`\`\``,
 				)
 			}
 			case "number":
-				return await int.reply(
+				return int.reply(
 					Math.floor(
 						Math.random() *
 							(int.options.getInteger("max")! -
