@@ -6,7 +6,7 @@
     "start": "bun src/index.ts"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "@types/bun": "latest"
   },
   "dependencies": {
     "ascii-table3": "^0.9.0",
