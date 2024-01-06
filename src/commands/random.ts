@@ -7,27 +7,6 @@ import {
 
 const maxUsers = Number(Bun.env.MAX_USERS)
 
-const withUserOptions = (builder: SlashCommandSubcommandBuilder) => {
-	for (let i = 1; i <= maxUsers; i++) {
-		builder.addUserOption((option) =>
-			option
-				.setName(`user_${i}`)
-				.setDescription("User")
-				.setRequired(i === 1),
-		)
-	}
-	return builder
-}
-
-const withNameOptions = (builder: SlashCommandSubcommandBuilder) => {
-	for (let i = 1; i <= maxUsers; i++) {
-		builder.addStringOption((option) =>
-			option.setName(`name_${i}`).setDescription("Name"),
-		)
-	}
-	return builder
-}
-
 export default {
 	config: new SlashCommandBuilder()
 		.setName("random")
@@ -145,4 +124,25 @@ export default {
 				)
 		}
 	},
+}
+
+function withUserOptions(builder: SlashCommandSubcommandBuilder) {
+	for (let i = 1; i <= maxUsers; i++) {
+		builder.addUserOption((option) =>
+			option
+				.setName(`user_${i}`)
+				.setDescription("User")
+				.setRequired(i === 1),
+		)
+	}
+	return builder
+}
+
+function withNameOptions(builder: SlashCommandSubcommandBuilder) {
+	for (let i = 1; i <= maxUsers; i++) {
+		builder.addStringOption((option) =>
+			option.setName(`name_${i}`).setDescription("Name"),
+		)
+	}
+	return builder
 }
