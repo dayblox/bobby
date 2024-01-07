@@ -12,7 +12,7 @@
   - [Hot reloading](https://bun.sh/docs/runtime/hot#hot-mode)
   - [TypeScript first class support](https://bun.sh/docs/runtime/typescript)
 - [<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/17180392/266780371-74b32ff7-5cc3-45e1-af80-923a05c9f87b.svg" height=19.2 align=center /> Biome](https://biomejs.dev/)
-  - [Fast formatting](https://github.com/biomejs/biome/tree/main/benchmark#formatter)
+  - [Fast formatting](https://github.com/biomejs/biome/tree/main/benchmark#formatting)
   - [Fast linting](https://github.com/biomejs/biome/tree/main/benchmark#linting)
   - [Import sorting](https://biomejs.dev/analyzer/#imports-sorting)
 - [<img src="https://user-images.githubusercontent.com/124377191/228447757-78408c15-e914-4fb3-9135-f1ff45ee3fce.svg" height=19.2 align=center /> GitHub](https://github.com)
