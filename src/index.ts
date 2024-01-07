@@ -1,7 +1,7 @@
 import { Client, GatewayIntentBits } from "discord.js"
 import commands from "./commands"
-import log from "./log"
-import register from "./register"
+import log from "./utils/log"
+import register from "./utils/register"
 
 register(commands.map(({ config }) => config))
 

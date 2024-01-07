@@ -1,5 +1,5 @@
 import { REST, Routes } from "discord.js"
-import commands from "./commands"
+import commands from "../commands"
 
 export default async (body: (typeof commands)[0]["config"][]) => {
 	try {
