@@ -1,11 +1,11 @@
-import { Client, GatewayIntentBits } from "discord.js"
+import { Client } from "discord.js"
 import commands from "./commands"
 import log from "./utils/log"
 import register from "./utils/register"
 
 register(commands.map(({ config }) => config))
 
-new Client({ intents: [GatewayIntentBits.Guilds] })
+new Client({ intents: [] })
 	.on("interactionCreate", (interaction) => {
 		if (!interaction.isChatInputCommand()) return
 		commands
