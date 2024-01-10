@@ -1,7 +1,7 @@
 {
-  "name": "bun-ts",
+  "name": "bobby",
   "author": "dayblox",
-  "description": "Bun + TypeScript starter",
+  "description": "Bobby the Discord bot",
   "scripts": {
     "start": "bun src/index.ts"
   },
