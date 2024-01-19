@@ -4,6 +4,7 @@ import {
 	SlashCommandBuilder,
 	SlashCommandSubcommandBuilder,
 } from "discord.js"
+import type { Command } from "."
 
 const maxUsers = Number(Bun.env.MAX_USERS)
 
@@ -67,7 +68,7 @@ export default {
 						.setRequired(true),
 				),
 		),
-	async execute(int: ChatInputCommandInteraction) {
+	execute(int: ChatInputCommandInteraction) {
 		const users = []
 		for (let i = 1; i <= maxUsers; i++) {
 			const user = int.options.getUser(`user_${i}`)
@@ -124,7 +125,7 @@ export default {
 				)
 		}
 	},
-}
+} satisfies Command
 
 function withUserOptions(builder: SlashCommandSubcommandBuilder) {
 	for (let i = 1; i <= maxUsers; i++) {

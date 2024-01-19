@@ -1,7 +1,7 @@
 import { REST, Routes } from "discord.js"
-import commands from "../commands"
+import type { Command } from "../commands"
 
-export default async (body: (typeof commands)[0]["config"][]) => {
+export default async (body: Command["config"][]) => {
 	try {
 		await new REST()
 			.setToken(Bun.env.TOKEN!)

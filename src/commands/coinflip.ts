@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
+import type { Command } from "."
 
 export default {
 	config: new SlashCommandBuilder()
@@ -7,4 +8,4 @@ export default {
 	execute(int: ChatInputCommandInteraction) {
 		int.reply(Math.random() < 0.5 ? "🪙 Heads" : "🪙 Tails")
 	},
-}
+} satisfies Command

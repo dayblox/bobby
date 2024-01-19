@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
+import type { Command } from "."
 
 export default {
 	config: new SlashCommandBuilder()
@@ -20,4 +21,4 @@ export default {
 		}
 		int.reply(words.join(" "))
 	},
-}
+} satisfies Command
