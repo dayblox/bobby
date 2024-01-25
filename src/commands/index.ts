@@ -6,7 +6,7 @@ import coinflip from "./coinflip"
 import random from "./random"
 import shuffle from "./shuffle"
 
-export default [random, coinflip, shuffle] satisfies Command[]
+export default { random, coinflip, shuffle } as Record<string, Command>
 
 export type Command = {
 	config: Partial<SlashCommandBuilder>
