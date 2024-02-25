@@ -1,22 +1,22 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "jsx": "react-jsx",
+    // Enable latest features
     "lib": ["ESNext"],
+    "target": "ESNext",
     "module": "ESNext",
     "moduleDetection": "force",
-    "target": "ESNext",
+    "jsx": "react-jsx",
+    "allowJs": true,
 
-    /* Bundler mode */
+    // Bundler mode
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
-    "moduleResolution": "bundler",
-    "noEmit": true,
     "verbatimModuleSyntax": true,
+    "noEmit": true,
 
-    /* Linting */
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "skipLibCheck": true,
+    // Best practices
     "strict": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true
   }
 }
