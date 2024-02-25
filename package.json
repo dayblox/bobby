@@ -3,7 +3,7 @@
   "author": "dayblox",
   "description": "Bobby the Discord bot",
   "scripts": {
-    "start": "bun src/index.ts"
+    "start": "bun --smol src/index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"

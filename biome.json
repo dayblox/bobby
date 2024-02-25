@@ -1,16 +1,7 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-	"files": { "ignore": ["node_modules/*"] },
-	"javascript": {
-		"formatter": {
-			"semicolons": "asNeeded"
-		}
-	},
-	"linter": {
-		"rules": {
-			"style": {
-				"noNonNullAssertion": "off"
-			}
-		}
-	}
+  "$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
+  "formatter": { "indentStyle": "space" },
+  "javascript": { "formatter": { "semicolons": "asNeeded" } },
+  "json": { "parser": { "allowComments": true } },
+  "linter": { "rules": { "style": { "noNonNullAssertion": "off" } } }
 }
